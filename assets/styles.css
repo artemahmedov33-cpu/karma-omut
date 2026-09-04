@@ -324,8 +324,10 @@ body.is-loaded .hero-title .ln>i{transform:none}
 .faq-q .ic::after{left:10px;top:0;width:2px;height:22px;transition:transform .4s var(--ease)}
 .faq-item.open .faq-q .ic{transform:rotate(180deg)}
 .faq-item.open .faq-q .ic::after{transform:scaleY(0)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
-.faq-a>div{padding:0 26px 24px;color:var(--muted);font-size:.97rem;line-height:1.7}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a>div{overflow:hidden;min-height:0}
+.faq-a>div>p{margin:0;padding:0 26px 24px;color:var(--muted);font-size:.97rem;line-height:1.7}
 
 /* ==================== STICKY MOBILE BAR + BACK-TO-TOP ==================== */
 .mbar{display:none}
@@ -455,7 +457,7 @@ body.is-loaded .hero-title .ln>i{transform:none}
 .gallery figure{position:relative;aspect-ratio:3/4;border-radius:8px;overflow:hidden;border:1px solid var(--line);cursor:pointer;margin:0}
 .gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
 .gallery figure:hover img{transform:scale(1.06)}
-.gallery figure::after{content:"＋";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Jura";font-size:2rem;color:#fff;background:rgba(5,5,6,.35);opacity:0;transition:opacity .3s}
+.gallery figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,5,6,.45));opacity:0;transition:opacity .35s var(--ease);pointer-events:none}
 .gallery figure:hover::after{opacity:1}
 .lightbox{position:fixed;inset:0;z-index:10005;background:rgba(5,5,6,.95);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s var(--ease)}
 .lightbox.open{opacity:1;visibility:visible}
@@ -472,17 +474,92 @@ body.is-loaded .hero-title .ln>i{transform:none}
   .training-grid{grid-template-columns:1fr;gap:34px}
   .training-visual{max-width:520px;margin:0 auto;width:100%}
   .studio-grid{grid-template-columns:repeat(4,1fr)}
-  .gallery{grid-template-columns:repeat(3,1fr)}
+  /* планшет: мозаика в 3 колонки (фото не обрезаются) */
+  .gallery{display:block;column-count:3;column-gap:12px}
+  .gallery figure{aspect-ratio:auto;break-inside:avoid;margin:0 0 12px}
+  .gallery img{position:static;width:100%;height:auto;object-fit:initial}
   .calc-inner{flex-direction:column;align-items:flex-start;gap:22px}
 }
 @media (max-width:680px){
   .studio-strip{padding:36px 0}
   .studio-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .about-collage{gap:10px}
-  .gallery{grid-template-columns:repeat(2,1fr);gap:10px}
+  /* мобилка: мозаика в 2 колонки */
+  .gallery{column-count:2;column-gap:10px}
+  .gallery figure{margin:0 0 10px}
   .calc-actions{width:100%}
   .calc-actions .btn{flex:1;justify-content:center}
   .page-top{padding:104px 0 4px}
   .lb-btn{width:44px;height:44px;font-size:1.25rem}
   .lb-prev{left:8px}.lb-next{right:8px}
 }
+
+/* ==================== TRAINING EXTRAS ==================== */
+.training-format{margin:22px 0 24px;color:var(--muted);font-size:.98rem}
+.training-format b{color:var(--white);font-family:"Jura",sans-serif;font-weight:600}
+.train-shots{grid-template-columns:repeat(3,1fr);margin-top:16px}
+details.prog{margin-top:22px;border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden}
+.prog summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-family:"Jura",sans-serif;font-size:1.06rem;letter-spacing:.02em;color:var(--white)}
+.prog summary::-webkit-details-marker{display:none}
+.prog summary:hover{color:var(--red)}
+body.cursor-on .prog summary{cursor:none}
+.prog summary .ic{flex:0 0 22px;width:22px;height:22px;position:relative;transition:transform .4s var(--ease)}
+.prog summary .ic::before,.prog summary .ic::after{content:"";position:absolute;background:var(--red);border-radius:2px}
+.prog summary .ic::before{left:0;top:10px;width:22px;height:2px}
+.prog summary .ic::after{left:10px;top:0;width:2px;height:22px;transition:transform .4s var(--ease)}
+.prog[open] summary{color:var(--red)}
+.prog[open] summary .ic::after{transform:scaleY(0)}
+.prog-body{padding:0 26px 6px}
+.prog ol{margin:0 0 16px 20px;padding:0}
+.prog ol li{color:var(--muted);font-size:.96rem;line-height:1.6;margin-bottom:10px;padding-left:4px}
+.prog ol li::marker{color:var(--red)}
+@media (max-width:680px){
+  .train-shots{grid-template-columns:repeat(3,1fr);gap:8px}
+  .prog summary{padding:16px 18px;font-size:.98rem}
+  .prog-body{padding:0 18px 4px}
+}
+
+/* ==================== EDUCATION TEASER (homepage) ==================== */
+.edu-teaser{display:grid;grid-template-columns:.85fr 1.15fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);transition:border-color .4s var(--ease)}
+.edu-teaser:hover{border-color:rgba(224,18,43,.4)}
+.edu-photo{position:relative;min-height:300px}
+.edu-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.edu-body{padding:42px 46px}
+.edu-body .eyebrow{display:inline-block;margin-bottom:14px}
+.edu-body h2{font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:400;margin-bottom:14px;line-height:1.05}
+.edu-body h2 .accent{color:var(--red)}
+.edu-body p{color:var(--muted);font-size:1.02rem;margin-bottom:24px;max-width:520px}
+@media (max-width:768px){
+  .edu-teaser{grid-template-columns:1fr}
+  .edu-photo{min-height:220px}
+  .edu-body{padding:28px 22px}
+}
+
+/* ==================== TRAINING PAGE EXTRAS ==================== */
+.prog-open ol{margin:0 0 0 22px;padding:0}
+.prog-open ol li{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:12px;padding-left:6px}
+.prog-open ol li::marker{color:var(--red)}
+.edu-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:44px;padding:30px 34px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,rgba(224,18,43,.14),rgba(224,18,43,.02))}
+.edu-cta h3{font-family:"Jura",sans-serif;font-size:1.4rem;font-weight:500;margin-bottom:6px}
+.edu-cta p{color:var(--muted);font-size:.98rem}
+@media (max-width:680px){.edu-cta{padding:24px 22px}.edu-cta .btn{width:100%;justify-content:center}}
+
+/* ==================== ABOUT: выравнивание и hover ==================== */
+/* на десктопе крупное фото тянется на всю высоту колонки — верх и низ вровень с текстом и маленькими фото */
+@media (min-width:1025px){
+  .about-grid{align-items:stretch}
+  .about-visual{aspect-ratio:auto}
+  .about-text{display:flex;flex-direction:column}
+  .about-collage{margin-top:auto;margin-bottom:0}
+}
+/* реакция маленьких фото на мышь */
+.about-collage .ph{cursor:pointer;transition:border-color .4s var(--ease),transform .4s var(--ease)}
+.about-collage .ph img{transition:transform .7s var(--ease)}
+.about-collage .ph:hover{border-color:rgba(224,18,43,.55);transform:translateY(-4px)}
+.about-collage .ph:hover img{transform:scale(1.07)}
+.about-collage .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(224,18,43,.25));opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
+.about-collage .ph:hover::after{opacity:1}
+/* крупное фото — лёгкая реакция */
+.about-visual{overflow:hidden}
+.about-visual .about-photo{transition:transform .8s var(--ease)}
+.about-visual:hover .about-photo{transform:scale(1.04)}

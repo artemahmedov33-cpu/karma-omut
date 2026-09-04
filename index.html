@@ -24,9 +24,10 @@
 <meta name="twitter:description" content="Тату-коллектив в Волгограде. Авторские работы, реализм, графика, перекрытие. Рейтинг 5.0.">
 <meta name="twitter:image" content="https://karma-omut.ru/img/og-image.jpg">
 <!-- Icons -->
-<link rel="icon" href="img/icon-48.png" sizes="48x48" type="image/png">
-<link rel="icon" href="img/icon-192.png" sizes="192x192" type="image/png">
-<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,7 +150,7 @@
     <nav class="menu" aria-label="Основное меню">
       <a href="#about">О студии</a>
       <a href="works.html">Работы</a>
-      <a href="#training">Обучение</a>
+      <a href="training.html">Обучение</a>
       <a href="#reviews">Отзывы</a>
       <a href="#contact">Контакты</a>
     </nav>
@@ -161,7 +162,7 @@
 <nav class="mobile-nav" id="mobileNav" aria-label="Мобильное меню">
   <a href="#about">О студии</a>
   <a href="works.html">Работы</a>
-  <a href="#training">Обучение</a>
+  <a href="training.html">Обучение</a>
   <a href="#reviews">Отзывы</a>
   <a href="#contact">Контакты</a>
   <div class="m-contacts">
@@ -215,40 +216,27 @@
   </div>
 </section>
 
-<!-- STUDIO PHOTOS -->
-<section class="studio-strip" id="studio">
-  <div class="wrap">
-    <div class="studio-grid">
-      <!-- TODO: заменить заглушки на реальные фото студии/атмосферы. Формат: <div class="ph reveal"><img src="img/ФАЙЛ.webp" alt="Студия Karma Omut" loading="lazy"></div> -->
-      <div class="ph reveal"><span>фото студии</span></div>
-      <div class="ph reveal d1"><span>атмосфера</span></div>
-      <div class="ph reveal d2"><span>рабочее место</span></div>
-      <div class="ph reveal d3"><span>интерьер</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-text reveal">
-        <span class="eyebrow">О коллективе</span>
-        <h2 class="wipe" style="font-size:clamp(2rem,4.5vw,3.4rem);font-weight:400;margin:18px 0 26px">Место, где идея<br>обретает <span style="color:var(--red)">форму</span></h2>
-        <p><strong>Karma Omut</strong> — тату-коллектив в Волгограде. Собрали мастеров с разным почерком: от тонкой графики и орнаментов до плотного реализма и перекрытий.</p>
-        <div class="about-collage">
-          <!-- TODO: заменить на 2 реальных фото студии/работ -->
-          <div class="ph reveal"><span>фото</span></div>
-          <div class="ph reveal d1"><span>фото</span></div>
-        </div>
+        <span class="eyebrow">О студии</span>
+        <h2 class="wipe" style="font-size:clamp(2rem,4.5vw,3.4rem);font-weight:400;margin:18px 0 26px">Пространство, где идея<br>обретает <span style="color:var(--red)">форму</span></h2>
+        <p><strong>Karma Omut</strong> — тату-студия в Волгограде с отдельными рабочими зонами и авторским интерьером. Здесь не тесно, никто не торопит и есть время спокойно обсудить идею.</p>
+        <p>Профессиональные пигменты, одноразовые расходники, полная упаковка рабочей зоны перед каждым сеансом.</p>
         <div class="about-features" style="grid-template-columns:repeat(3,1fr)">
-          <div class="feat"><b>Стерильность</b><span>Одноразовые иглы, автоклав</span></div>
-          <div class="feat"><b>Уникальность</b><span>Эскиз с нуля под тебя</span></div>
-          <div class="feat"><b>Комфорт</b><span>Без спешки, уютная атмосфера</span></div>
+          <div class="feat"><b>Стерильность</b><span>Одноразовые расходники и барьерная защита</span></div>
+          <div class="feat"><b>Уникальность</b><span>Авторский интерьер, ничего типового</span></div>
+          <div class="feat"><b>Комфорт</b><span>Просторно и без спешки</span></div>
+        </div>
+        <div class="about-collage">
+          <div class="ph reveal" data-hover><img src="img/studio-sterile.webp" alt="Стерильная подготовка рабочего места: барьерная плёнка и одноразовые картриджи" loading="lazy" decoding="async"></div>
+          <div class="ph reveal d1" data-hover><img src="img/studio-inks.webp" alt="Стеллаж с профессиональными пигментами в студии Karma Omut" loading="lazy" decoding="async"></div>
         </div>
       </div>
-      <div class="about-visual reveal d2">
-        <img class="about-photo" src="img/about-interior.webp" width="960" height="1280" alt="Интерьер тату-студии Karma Omut в Волгограде" loading="lazy">
+      <div class="about-visual reveal d2" data-hover>
+        <img class="about-photo" src="img/studio-interior.webp" width="960" height="1280" alt="Интерьер тату-студии Karma Omut в Волгограде — рабочие зоны" loading="lazy">
         <span class="badge">est. 2018 · Volgograd</span>
       </div>
     </div>
@@ -261,28 +249,6 @@
     <i><b>KARMA</b> <span class="dot">·</span> ОМУТ <span class="dot">·</span> TATTOO COLLECTIVE <span class="dot">·</span> ВОЛГОГРАД <span class="dot">·</span> </i><i><b>KARMA</b> <span class="dot">·</span> ОМУТ <span class="dot">·</span> TATTOO COLLECTIVE <span class="dot">·</span> ВОЛГОГРАД <span class="dot">·</span> </i>
   </div>
 </div>
-
-<!-- TRAINING -->
-<section class="training" id="training">
-  <div class="wrap">
-    <div class="training-grid">
-      <div class="training-text reveal">
-        <span class="eyebrow">Обучение</span>
-        <h2 class="wipe">Научим бить <span class="accent">тату</span></h2>
-        <p>Обучаем татуировке с нуля и прокачиваем действующих мастеров. Индивидуально и в мини-группах, с практикой и поддержкой после курса.</p>
-        <div class="training-levels">
-          <div class="tlvl"><b>С нуля</b><span>Для тех, кто хочет освоить профессию: от гигиены и техники до первых работ на коже.</span></div>
-          <div class="tlvl"><b>Для мастеров любого уровня</b><span>Повышаем мастерство действующих: реализм, графика, цвет, разбор работ.</span></div>
-        </div>
-        <a href="https://wa.me/79275454725?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%82%D0%B0%D1%82%D1%83%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B5." target="_blank" rel="noopener" class="btn btn-red" data-hover><span>Узнать об обучении</span></a>
-      </div>
-      <div class="training-visual reveal d2">
-        <!-- TODO: заменить на фото с обучения. Формат: <img src="img/ФАЙЛ.webp" alt="Обучение тату Karma Omut" loading="lazy"> -->
-        <span>фото с обучения</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CALC COST -->
 <section class="calc" id="calc">
@@ -347,6 +313,21 @@
         <p>Выдаём памятку по уходу и сопровождаем заживление — мастер остаётся с вами на связи.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- EDUCATION TEASER -->
+<section id="training">
+  <div class="wrap">
+    <a class="edu-teaser reveal" href="training.html" data-hover aria-label="Перейти к странице обучения">
+      <div class="edu-photo"><img src="img/train-1.webp" alt="Обучение тату в студии Karma Omut" loading="lazy" decoding="async"></div>
+      <div class="edu-body">
+        <span class="eyebrow">Обучение</span>
+        <h2 class="wipe">Стань мастером <span class="accent">тату</span></h2>
+        <p>Обучаем татуировке с нуля и прокачиваем действующих мастеров. Практика на моделях, первые работы для портфолио, поддержка после курса.</p>
+        <span class="btn btn-red"><span>Подробнее об обучении →</span></span>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -430,23 +411,23 @@
     <div class="faq-list reveal d1">
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" data-hover><span>Больно ли делать татуировку?</span><span class="ic" aria-hidden="true"></span></button>
-        <div class="faq-a"><div>Ощущения индивидуальны и зависят от места на теле, площади и длительности сеанса. Большинство описывают процесс как терпимый дискомфорт, а не резкую боль. Чувствительнее зоны над костью и с тонкой кожей (рёбра, стопа, кисть), мягкие участки переносятся легче. Мастер делает перерывы и следит за вашим состоянием.</div></div>
+        <div class="faq-a"><div><p>Ощущения индивидуальны и зависят от места на теле, площади и длительности сеанса. Большинство описывают процесс как терпимый дискомфорт, а не резкую боль. Чувствительнее зоны над костью и с тонкой кожей (рёбра, стопа, кисть), мягкие участки переносятся легче. Мастер делает перерывы и следит за вашим состоянием.</p></div></div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" data-hover><span>Как долго заживает тату и как за ней ухаживать?</span><span class="ic" aria-hidden="true"></span></button>
-        <div class="faq-a"><div>Поверхностное заживление обычно занимает около 2–4 недель, полное восстановление кожи — до 1,5–2 месяцев. Первые дни бережно мойте тату, наносите заживляющее средство, не сдирайте корочки, не мочите длительно и избегайте бассейна, сауны и прямого солнца. Подробную памятку по уходу мастер выдаёт после сеанса.</div></div>
+        <div class="faq-a"><div><p>Поверхностное заживление обычно занимает около 2–4 недель, полное восстановление кожи — до 1,5–2 месяцев. Первые дни бережно мойте тату, наносите заживляющее средство, не сдирайте корочки, не мочите длительно и избегайте бассейна, сауны и прямого солнца. Подробную памятку по уходу мастер выдаёт после сеанса.</p></div></div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" data-hover><span>С какого возраста можно сделать татуировку?</span><span class="ic" aria-hidden="true"></span></button>
-        <div class="faq-a"><div>Мы делаем татуировки только совершеннолетним — с 18 лет. При себе нужен документ, подтверждающий возраст. Это требование безопасности, отступлений от него нет.</div></div>
+        <div class="faq-a"><div><p>Мы делаем татуировки только совершеннолетним — с 18 лет. При себе нужен документ, подтверждающий возраст. Это требование безопасности, отступлений от него нет.</p></div></div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" data-hover><span>Как записаться на сеанс?</span><span class="ic" aria-hidden="true"></span></button>
-        <div class="faq-a"><div>Оставьте заявку через форму на сайте или напишите нам в WhatsApp либо Instagram. Мы свяжемся с вами, обсудим идею, размер и место, подберём мастера и согласуем удобное время. Приём ведётся по предварительной записи.</div></div>
+        <div class="faq-a"><div><p>Оставьте заявку через форму на сайте или напишите нам в WhatsApp либо Instagram. Мы свяжемся с вами, обсудим идею, размер и место, подберём мастера и согласуем удобное время. Приём ведётся по предварительной записи.</p></div></div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" data-hover><span>Сколько стоит и нужен ли аванс?</span><span class="ic" aria-hidden="true"></span></button>
-        <div class="faq-a"><div>Итоговая стоимость зависит от размера, детализации и расположения татуировки — точную цену мастер называет после обсуждения эскиза. Для закрепления даты и подготовки индивидуального эскиза может потребоваться предоплата; её размер и условия уточняются при записи.</div></div>
+        <div class="faq-a"><div><p>Итоговая стоимость зависит от размера, детализации и расположения татуировки — точную цену мастер называет после обсуждения эскиза. Для закрепления даты и подготовки индивидуального эскиза может потребоваться предоплата; её размер и условия уточняются при записи.</p></div></div>
       </div>
     </div>
   </div>
@@ -469,7 +450,7 @@
           <b>Разделы</b>
           <a href="#about">О студии</a>
           <a href="works.html">Работы</a>
-          <a href="#training">Обучение</a>
+          <a href="training.html">Обучение</a>
           <a href="#contact">Контакты</a>
         </div>
         <div class="foot-col">
@@ -514,20 +495,14 @@
       var wasOpen=it.classList.contains("open");
       items.forEach(function(o){
         o.classList.remove("open");
-        var oa=o.querySelector(".faq-a");if(oa)oa.style.maxHeight=null;
         var oq=o.querySelector(".faq-q");if(oq)oq.setAttribute("aria-expanded","false");
       });
       if(!wasOpen){
         it.classList.add("open");
-        a.style.maxHeight=a.scrollHeight+"px";
         q.setAttribute("aria-expanded","true");
       }
     });
   });
-  window.addEventListener("resize",function(){
-    var op=document.querySelector(".faq-item.open .faq-a");
-    if(op)op.style.maxHeight=op.scrollHeight+"px";
-  },{passive:true});
   /* ---------- back to top ---------- */
   var tt=document.querySelector(".totop");
   if(tt){
@@ -727,5 +702,15 @@
   reset.addEventListener("click",function(){form.reset();success.classList.remove("show");});
 })();
 </script>
+
+<!-- LIGHTBOX (фото студии) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото студии">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Предыдущее">‹</button>
+  <img id="lbImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Следующее">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+<script src="assets/lightbox.js" defer></script>
 </body>
 </html>
