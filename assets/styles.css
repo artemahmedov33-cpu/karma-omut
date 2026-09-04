@@ -563,3 +563,6 @@ body.cursor-on .prog summary{cursor:none}
 .about-visual{overflow:hidden}
 .about-visual .about-photo{transition:transform .8s var(--ease)}
 .about-visual:hover .about-photo{transform:scale(1.04)}
+
+/* подпись «Обучение» — над карточкой, как заголовки остальных разделов */
+.edu-eyebrow{display:inline-block;margin-bottom:18px}
