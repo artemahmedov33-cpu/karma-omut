@@ -499,8 +499,9 @@ body.is-loaded .hero-title .ln>i{transform:none}
   /* мобилка: мозаика в 2 колонки */
   .gallery{column-count:2;column-gap:10px}
   .gallery figure{margin:0 0 10px}
-  .calc-actions{width:100%}
-  .calc-actions .btn{flex:1;justify-content:center}
+  /* мобилка: кнопки в столбик — длинная подпись не переносится */
+  .calc-actions{width:100%;flex-direction:column;align-items:stretch}
+  .calc-actions .btn{width:100%;justify-content:center;white-space:nowrap}
   .page-top{padding:104px 0 4px}
   .lb-btn{width:44px;height:44px;font-size:1.25rem}
   .lb-prev{left:8px}.lb-next{right:8px}
