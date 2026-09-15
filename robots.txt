@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /img/scrape/
 
-Sitemap: https://karma-omut.ru/sitemap.xml
+Sitemap: https://karma-tattoo.ru/sitemap.xml
