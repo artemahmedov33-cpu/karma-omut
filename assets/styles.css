@@ -234,7 +234,7 @@ section{position:relative;padding:84px 0}
 .reviews{background:var(--bg-2)}
 /* Отзывы: горизонтальная лента — листается колесом и свайпом,
    карточки примагничиваются к краю */
-.rev-rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
+.rev-rail{display:flex;gap:18px;overflow-x:auto;
   padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
@@ -245,9 +245,15 @@ section{position:relative;padding:84px 0}
 .rev-rail.at-start.at-end{-webkit-mask-image:none;mask-image:none}
 .rev-rail::-webkit-scrollbar{display:none}
 .rev-rail:focus-visible{outline:2px solid var(--red);outline-offset:6px;border-radius:12px}
-.rev-rail .rev{flex:0 0 340px;scroll-snap-align:start}
+.rev-rail .rev{flex:0 0 340px}
+/* примагничивание карточек — только там, где листают пальцем.
+   На мышке оно мешает: после перетаскивания лента отпрыгивала назад. */
+@media (hover:none) and (pointer:coarse){
+  .rev-rail{scroll-snap-type:x mandatory}
+  .rev-rail .rev{scroll-snap-align:start}
+}
 @media (hover:hover) and (pointer:fine){.rev-rail{cursor:grab}}
-.rev-rail.dragging{cursor:grabbing;scroll-snap-type:none;
+.rev-rail.dragging{cursor:grabbing;
   -webkit-user-select:none;user-select:none}
 .rev-rail.dragging .rev{pointer-events:none}
 /* панель над лентой: подсказка слева, стрелки справа */
