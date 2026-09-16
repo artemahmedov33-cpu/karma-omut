@@ -55,8 +55,23 @@ body.cursor-on a,body.cursor-on button,body.cursor-on input,body.cursor-on texta
 @media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none!important}body.cursor-on{cursor:auto}}
 
 /* ==================== HEADER ==================== */
-header{position:fixed;top:0;left:0;right:0;z-index:900;transition:background .4s var(--ease),backdrop-filter .4s,padding .4s var(--ease);padding:22px 0}
-header.scrolled{background:rgba(10,10,11,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:12px 0;border-bottom:1px solid var(--line)}
+/* Шапка: при скролле сжимается с 22px до 12px по вертикали.
+   Padding не анимируем — это гоняло бы пересчёт вёрстки всей шапки на каждом кадре.
+   Вместо этого фон вынесен в отдельный слой ::before и поднимается трансформом на 20px,
+   а содержимое — на 10px, чтобы остаться по центру получившейся полосы. */
+header{position:fixed;top:0;left:0;right:0;z-index:900;padding:22px 0}
+header::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;
+  background:rgba(10,10,11,0);border-bottom:1px solid transparent;
+  transition:background .4s var(--ease),-webkit-backdrop-filter .4s var(--ease),
+    backdrop-filter .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease)}
+header .nav{transition:transform .4s var(--ease)}
+header.scrolled::before{background:rgba(10,10,11,.72);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);transform:translateY(-20px)}
+header.scrolled .nav{transform:translateY(-10px)}
+@media (prefers-reduced-motion:reduce){
+  header::before,header .nav{transition:none}
+}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
 .logo{display:flex;align-items:baseline;gap:.55rem;font-family:"Jura";font-weight:500}
 .logo .k{font-size:1.5rem;letter-spacing:.34em;padding-left:.34em}
@@ -217,7 +232,41 @@ section{position:relative;padding:84px 0}
 
 /* reviews */
 .reviews{background:var(--bg-2)}
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+/* Отзывы: горизонтальная лента — листается колесом и свайпом,
+   карточки примагничиваются к краю */
+.rev-rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.rev-rail.at-start{-webkit-mask-image:linear-gradient(90deg,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,#000 95%,transparent)}
+.rev-rail.at-end{-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%);
+  mask-image:linear-gradient(90deg,transparent,#000 5%)}
+.rev-rail.at-start.at-end{-webkit-mask-image:none;mask-image:none}
+.rev-rail::-webkit-scrollbar{display:none}
+.rev-rail:focus-visible{outline:2px solid var(--red);outline-offset:6px;border-radius:12px}
+.rev-rail .rev{flex:0 0 340px;scroll-snap-align:start}
+@media (hover:hover) and (pointer:fine){.rev-rail{cursor:grab}}
+.rev-rail.dragging{cursor:grabbing;scroll-snap-type:none;
+  -webkit-user-select:none;user-select:none}
+.rev-rail.dragging .rev{pointer-events:none}
+/* панель над лентой: подсказка слева, стрелки справа */
+.rail-ctl{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.rail-hint{display:inline-flex;align-items:center;gap:8px;color:var(--muted);
+  font-family:"Jura",sans-serif;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase}
+.rail-hint i{font-style:normal;color:var(--red);font-size:1rem;
+  animation:railNudge 2.4s var(--ease) infinite}
+@keyframes railNudge{0%,60%,100%{transform:translateX(0)}30%{transform:translateX(5px)}}
+.rail-btns{display:flex;gap:10px;flex:none}
+.rail-btn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+  background:transparent;color:var(--white);font-size:1.15rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .35s var(--ease),background-color .35s var(--ease),
+    color .35s var(--ease),opacity .35s var(--ease)}
+.rail-btn:hover:not(.off){border-color:var(--red);background:var(--red);color:#fff}
+.rail-btn.off{opacity:.3;pointer-events:none}
+.rail-btn:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.rail-hint i{animation:none}}
 .rev{border:1px solid var(--line);border-radius:10px;padding:30px;background:var(--panel);position:relative;transition:transform .4s var(--ease),border-color .4s var(--ease)}
 .rev:hover{transform:translateY(-5px);border-color:rgba(224,18,43,.4)}
 .rev .stars{color:var(--red);letter-spacing:3px;margin-bottom:14px}
@@ -279,7 +328,10 @@ footer{background:#050506;border-top:1px solid var(--line);padding:60px 0 34px}
 .foot-top .logo .k,.foot-top .logo .o{font-size:1.7rem}
 .foot-links{display:flex;gap:50px;flex-wrap:wrap}
 .foot-col b{font-family:"Jura";font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:16px}
-.foot-col a,.foot-col span{display:block;color:var(--muted);font-size:.92rem;margin-bottom:10px;transition:color .3s}
+/* ссылки подвала: высота под палец — 44px по рекомендациям мобильной доступности */
+.foot-col a,.foot-col span{display:block;color:var(--muted);font-size:.92rem;transition:color .3s}
+.foot-col a{min-height:44px;display:flex;align-items:center}
+.foot-col span{padding:11px 0}
 .foot-col a:hover{color:var(--white)}
 .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;color:var(--muted);font-size:.8rem}
 .foot-bottom a{color:var(--muted)}.foot-bottom a:hover{color:var(--white)}
@@ -360,7 +412,7 @@ body.is-loaded .hero-title .ln>i{transform:none}
   .hero-actions,.hero-stats{justify-content:center}
   .hero-stats{margin-top:28px}
   .about-grid,.contact-grid{grid-template-columns:1fr;gap:30px}
-  .works-grid,.serv-grid,.masters-grid,.rev-grid,.proc-grid{grid-template-columns:repeat(2,1fr)}
+  .works-grid,.serv-grid,.masters-grid,.proc-grid{grid-template-columns:repeat(2,1fr)}
   .band-grid{grid-template-columns:repeat(2,1fr);gap:30px 20px}
   .scroll-cue{display:none}
 }
@@ -385,7 +437,7 @@ body.is-loaded .hero-title .ln>i{transform:none}
   .band{padding:38px 0}
   .band-grid{gap:26px 16px}
   .marquee{padding:16px 0}
-  .works-grid,.serv-grid,.masters-grid,.rev-grid,.proc-grid{grid-template-columns:1fr;gap:12px}
+  .works-grid,.serv-grid,.masters-grid,.proc-grid{grid-template-columns:1fr;gap:12px}
   .about-features{grid-template-columns:1fr;gap:16px;margin-top:24px}
   .about-text p{margin-bottom:14px}
   .form-card{padding:26px 20px}
@@ -397,6 +449,11 @@ body.is-loaded .hero-title .ln>i{transform:none}
   .contact{padding-top:74px}          /* место под подтёки сверху */
   .serv{padding:26px 22px}
   .rev{padding:24px}
+  .rev-rail{gap:12px;padding-bottom:2px}
+  .rail-ctl{margin-bottom:14px}
+  .rail-hint{font-size:.72rem;letter-spacing:.12em}
+  .rail-btn{width:40px;height:40px;font-size:1rem}
+  .rev-rail .rev{flex:0 0 78vw}
   .ci-row{padding:16px 0}
   footer{padding:40px 0 26px}
   .foot-top{padding-bottom:28px;gap:22px}

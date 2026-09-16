@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /img/scrape/
 
 Sitemap: https://karma-tattoo.ru/sitemap.xml
