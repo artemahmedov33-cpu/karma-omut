@@ -320,7 +320,7 @@ body.is-loaded .hero-title .ln>i{transform:none}
 .proc-card:hover{transform:translateY(-6px);border-color:rgba(224,18,43,.5)}
 .proc-card:hover::before{transform:scaleX(1)}
 .proc-num{font-family:"Jura";font-size:2.4rem;font-weight:600;color:rgba(224,18,43,.9);letter-spacing:.04em;line-height:1}
-.proc-card h4{font-size:1.22rem;margin:16px 0 10px;font-weight:500}
+.proc-card h3{font-size:1.22rem;margin:16px 0 10px;font-weight:500}
 .proc-card p{color:var(--muted);font-size:.92rem}
 
 /* ==================== FAQ ==================== */
