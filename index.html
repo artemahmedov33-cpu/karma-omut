@@ -34,8 +34,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="assets/leaflet.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="assets/leaflet.css"></noscript>
+<link rel="stylesheet" href="assets/leaflet.css">
 <link rel="stylesheet" href="assets/styles.css">
 <script type="application/ld+json">
 {
@@ -476,6 +475,11 @@
       <div class="map-card reveal d2">
         <div id="map" role="application"
              aria-label="Карта: тату-студия «Карма Омут», пр. им. Маршала Жукова, 135, Волгоград"></div>
+        <div class="map-fallback" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <b>Карма Омут</b>
+          <span>пр. им. Маршала Жукова, 135<br>Волгоград</span>
+        </div>
         <a class="map-link" href="https://yandex.ru/maps/org/karma_omut/4359489726/"
            target="_blank" rel="noopener" data-hover>
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Открыть в Яндекс.Картах</a>
@@ -640,8 +644,9 @@
     var initMap=function(){
       var sc=document.createElement("script");
       sc.src="assets/leaflet.js";
+      sc.onerror=function(){mapBox.parentNode.classList.add("map-failed");};
       sc.onload=function(){
-        if(!window.L)return;
+        if(!window.L){mapBox.parentNode.classList.add("map-failed");return;}
         var LAT=48.745257,LON=44.486890;
         var map=L.map("map",{center:[LAT,LON],zoom:17,
           scrollWheelZoom:false,   /* колесо не перехватываем — иначе страница застревает */
@@ -659,6 +664,11 @@
         /* колесо включаем по клику — так удобнее и скролл страницы не ломается */
         map.on("click",function(){map.scrollWheelZoom.enable();});
         map.on("mouseout",function(){map.scrollWheelZoom.disable();});
+        /* страховка: если квадраты не пришли — показываем адрес вместо пустоты */
+        setTimeout(function(){
+          if(!document.querySelector(".leaflet-tile-loaded"))
+            mapBox.parentNode.classList.add("map-failed");
+        },6000);
       };
       document.head.appendChild(sc);
     };

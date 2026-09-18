@@ -280,8 +280,20 @@ section{position:relative;padding:84px 0}
 .map-card{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
   background:var(--panel);min-height:520px}
 #map{position:absolute;inset:0;background:var(--panel);z-index:0}
+/* запасной вид: показывается, только если карта не отрисовалась */
+.map-fallback{position:absolute;inset:0;z-index:1;display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  text-align:center;padding:30px;color:var(--muted)}
+.map-fallback svg{width:44px;height:44px;color:var(--red)}
+.map-fallback b{font-family:"Jura",sans-serif;font-size:1.3rem;color:var(--white);letter-spacing:.05em}
+.map-fallback span{font-size:.92rem;line-height:1.6}
+.map-card.map-failed .map-fallback{display:flex}
+.map-card.map-failed #map{display:none}
 /* тайлы затемняем под палитру сайта, интерфейс карты не трогаем */
-.leaflet-tile-pane{filter:invert(.92) hue-rotate(180deg) saturate(.7) contrast(.95) brightness(.95)}
+/* фильтр вешаем на сами картинки-квадраты, а не на их контейнер:
+   Safari не рисует отфильтрованный слой, внутри которого дети сдвинуты translate3d */
+.leaflet-tile{-webkit-filter:invert(.92) hue-rotate(180deg) saturate(.7) contrast(.95) brightness(.95);
+  filter:invert(.92) hue-rotate(180deg) saturate(.7) contrast(.95) brightness(.95)}
 .leaflet-container{background:var(--panel);font-family:"Manrope",sans-serif}
 .leaflet-control-attribution{background:rgba(10,10,11,.7)!important;color:rgba(244,242,238,.5)!important;
   font-size:.64rem!important;padding:2px 7px!important}
