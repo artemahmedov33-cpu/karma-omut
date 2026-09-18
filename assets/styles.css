@@ -107,12 +107,13 @@ header.scrolled .nav{transform:translateY(-10px)}
 .hero-sub{margin:20px 0 22px;color:var(--muted);font-size:1.06rem;max-width:440px}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:20px}
 .btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:16px 30px;border-radius:44px;font-family:"Jura";letter-spacing:.08em;font-size:.95rem;overflow:hidden;transition:.4s var(--ease)}
-.btn-red{background:var(--red);color:#fff}
+.btn-red{background:var(--red);color:#fff;border:1px solid var(--red)}
 .btn-red::before{content:"";position:absolute;inset:0;background:var(--red-deep);transform:translateY(101%);transition:transform .4s var(--ease);z-index:0}
 .btn-red:hover::before{transform:translateY(0)}
 .btn-red span{position:relative;z-index:1}
 .btn-ghost{border:1px solid var(--line);color:var(--white)}
 .btn-ghost:hover{border-color:var(--white)}
+.btn svg{width:18px;height:18px;flex:none}
 .hero-stats{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
 .hero-stats .st b{font-family:"Jura";font-size:2rem;font-weight:600;display:block}
 .hero-stats .st span{color:var(--muted);font-size:.8rem;letter-spacing:.04em}
@@ -272,15 +273,29 @@ section{position:relative;padding:84px 0}
 .socials a:hover{background:var(--red);border-color:var(--red);transform:translateY(-4px)}
 .socials a svg{width:20px;height:20px}
 
-/* Карта в блоке контактов.
-   Кадр виджета делаем выше рамки на 118px — рекламная полоса Яндекса
-   уходит за край, подпись «© Яндекс» остаётся видной.
-   Фильтр переводит карту в тёмную гамму под палитру сайта. */
+/* Карта в блоке контактов — статичная картинка из тайлов OpenStreetMap,
+   собрана скриптом shots/pw/_staticmap.js. Рисуется мгновенно,
+   не зависит от сторонних скриптов и не режется блокировщиками.
+   Клик по кнопке открывает полноценные Яндекс.Карты. */
 .map-card{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
   background:var(--panel);min-height:520px}
-.map-card iframe{position:absolute;inset:0;width:100%;height:calc(100% + 118px);border:0;display:block;
-  filter:invert(.92) hue-rotate(180deg) saturate(.75) contrast(.95)}
-.map-link{position:absolute;left:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:9px;
+#map{position:absolute;inset:0;background:var(--panel);z-index:0}
+/* тайлы затемняем под палитру сайта, интерфейс карты не трогаем */
+.leaflet-tile-pane{filter:invert(.92) hue-rotate(180deg) saturate(.7) contrast(.95) brightness(.95)}
+.leaflet-container{background:var(--panel);font-family:"Manrope",sans-serif}
+.leaflet-control-attribution{background:rgba(10,10,11,.7)!important;color:rgba(244,242,238,.5)!important;
+  font-size:.64rem!important;padding:2px 7px!important}
+.leaflet-control-attribution a{color:rgba(244,242,238,.65)!important}
+.leaflet-control-zoom a{background:rgba(18,18,20,.92)!important;color:var(--white)!important;
+  border-color:var(--line)!important}
+.leaflet-control-zoom a:hover{background:var(--red)!important;border-color:var(--red)!important}
+.map-pin i{display:block;width:14px;height:14px;margin:6px;border-radius:50%;
+  background:var(--red);border:3px solid #fff;box-shadow:0 0 0 8px rgba(224,18,43,.22)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#151517;color:var(--white);
+  border:1px solid var(--line)}
+.leaflet-popup-content{font-size:.86rem;line-height:1.5}
+.leaflet-popup-content b{font-family:"Jura",sans-serif;letter-spacing:.04em}
+.map-link{position:absolute;left:16px;bottom:16px;z-index:500;display:inline-flex;align-items:center;gap:9px;
   padding:12px 20px;border-radius:44px;background:var(--red);color:#fff;
   font-family:"Jura",sans-serif;letter-spacing:.06em;font-size:.84rem;
   transition:background-color .35s var(--ease)}
